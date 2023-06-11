@@ -1,5 +1,6 @@
  package com.example.coroutineex
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
     lateinit var btnCount:Button
     lateinit var btnDownloadUserData:Button
     lateinit var tvcount: TextView
+     lateinit var tvUserMessage: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,14 +23,16 @@ import kotlinx.coroutines.launch
         btnCount=findViewById(R.id.btnCount)
         tvcount=findViewById(R.id.tvCount)
         btnDownloadUserData=findViewById(R.id.btnDownloadUserData)
+        tvUserMessage=findViewById(R.id.tvUserMessage)
         btnCount.setOnClickListener {
             tvcount.text=count++.toString()
 
         }
         btnDownloadUserData.setOnClickListener {
 
-            CoroutineScope(Dispatchers.IO).launch {
-                btnDownloadUserData()
+            CoroutineScope(Dispatchers.Main).launch {
+               // tvUserMessage.text=UserDataManager().getTotalUserCount().toString()
+                tvUserMessage.text=UserDataManager2().getTotalUserCount().toString()
             }
         }
 
